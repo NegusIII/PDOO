@@ -10,4 +10,8 @@ package irrgarten;
  */
 public class TestP1 {
     
+    public static void main(String[] args) {
+        
+        GameState()
+    }
 }

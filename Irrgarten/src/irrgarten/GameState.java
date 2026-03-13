@@ -16,13 +16,14 @@ public class GameState {
     private boolean winner;
     private String log;
     
-    GameState(){
-        labyrinth="";
-        players="";
-        monsters="";
-        currentPlayer=0;
-        winner=false;
-        log="";
+    GameState(String laberinto, String jugadores, String monstruos, int actual,
+            boolean ganador, String registro){
+        labyrinth=laberinto;
+        players=jugadores;
+        monsters=monstruos;
+        currentPlayer=actual;
+        winner=ganador;
+        log=registro;
     }
     
     public String getLabyrinth(){

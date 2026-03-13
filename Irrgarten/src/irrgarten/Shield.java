@@ -13,9 +13,9 @@ public class Shield {
     private final float protection;
     private int uses;
     
-    Shield(){
-        protection=10;
-        uses=5;
+    Shield(float proteccion, int usos){
+        protection=proteccion;
+        uses=usos;
     }
     
     public float protect(){

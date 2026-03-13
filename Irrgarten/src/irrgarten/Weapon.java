@@ -9,13 +9,12 @@ package irrgarten;
  * @author Sergio Salvador Gil
  */
 public class Weapon {
-    private final float power;
+    private float power;
     private int uses;
     
-    Weapon(){
-        Dice dado = new Dice();
-        power=dado.weaponPower();
-        uses=dado.usesLeft();
+    Weapon(float poder, int usos){
+        power=poder;
+        uses=usos;
     }
     public float attack(){
         float intensity=0;
