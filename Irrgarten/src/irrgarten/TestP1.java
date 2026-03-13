@@ -10,8 +10,17 @@ package irrgarten;
  */
 public class TestP1 {
     
-    public static void main(String[] args) {
+    public static void main() {
         
-        GameState()
+        GameState estado = new GameState("Namibia", "a", "", 0, false, "");
+        
+        System.out.println("Labyrinth: " + estado.getLabyrinth());
+        System.out.println("Players: " + estado.getPlayers());
+        System.out.println("Monsters: " + estado.getMonsters());
+        System.out.println("Current Player: " + estado.getCurrentPlayer());
+        System.out.println("Winner? " + estado.isWinner());
+        System.out.println("Log: " + estado.getLog());
+        
+        
     }
 }
