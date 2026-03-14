@@ -38,7 +38,7 @@ public class TestP1 {
         System.out.println("2- Clase Dice:\n");
         Dice dado = new Dice();
         
-        System.out.println("Posiciones aleatorias (hasta 10):");
+        System.out.println("Posiciones aleatorias [0,9]:");
         int num = 10;
         for(int i = 0; i < num; i++){
             
@@ -106,6 +106,28 @@ public class TestP1 {
         // Prueba de las clases Weapon y Shield
         System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n");
         System.out.println("3- Clases Weapon y Shield:\n");
+        
+        System.out.println("Generación de armas y escudos:");
+        for(int i = 0; i<num; i++){
+            Weapon w= new Weapon(dado.weaponPower(), dado.usesLeft());
+            if(i==num-1){
+                System.out.print(w.toString()+"\n");
+            }
+            else{
+                System.out.print(w.toString()+", ");
+            }
+        }
+        
+        for(int i = 0; i<num; i++){
+            Shield s= new Shield(dado.shieldPower(), dado.usesLeft());
+            if(i==num-1){
+                System.out.println(s.toString()+"\n");
+            }
+            else{
+                System.out.print(s.toString()+", ");
+            }
+            
+        }
         
         //Prueba de los Structs
         System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n");

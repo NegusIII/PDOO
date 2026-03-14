@@ -14,7 +14,7 @@ public class Dice {
     
     private final int MAX_USES = 5;
     private final float MAX_INTELLIGENCE = 10;
-    private final float MAX_STRENGTH = 11;
+    private final float MAX_STRENGTH = 10;
     private final float RESURRECT_PROB = (float) 0.3;
     private final int WEAPONS_REWARD = 2;
     private final int SHIELDS_REWARD = 3;
@@ -49,15 +49,15 @@ public class Dice {
    }
    
    int weaponReward(){
-       return generator.nextInt(WEAPONS_REWARD);
+       return generator.nextInt(WEAPONS_REWARD+1);
    }
    
    int shieldReward(){
-       return generator.nextInt(SHIELDS_REWARD);
+       return generator.nextInt(SHIELDS_REWARD+1);
    }
    
    int healthReward(){
-       return generator.nextInt(HEALTH_REWARD);
+       return generator.nextInt(HEALTH_REWARD+1);
    }
    
    float weaponPower(){
@@ -69,7 +69,7 @@ public class Dice {
    }
    
    int usesLeft(){
-       return generator.nextInt(MAX_USES);
+       return generator.nextInt(MAX_USES+1);
    }
    
    float intensity(float competence){
@@ -78,7 +78,7 @@ public class Dice {
    
    boolean discardElement(int usesLeft){
        boolean discard = false;
-       if (generator.nextFloat()<=MAX_USES/(float)usesLeft){
+       if (generator.nextFloat()>usesLeft/(float)MAX_USES){
            discard = true;
        }
        return discard;

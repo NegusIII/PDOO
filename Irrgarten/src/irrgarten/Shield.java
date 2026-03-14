@@ -28,7 +28,7 @@ public class Shield {
     }
     
     public String toString(){
-        String s="W[";
+        String s="S[";
         s= s + protection + ","+ uses;
         s+="]";
         return s;
