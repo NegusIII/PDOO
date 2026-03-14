@@ -14,7 +14,7 @@ public class Dice {
     
     private final int MAX_USES = 5;
     private final float MAX_INTELLIGENCE = 10;
-    private final float MAX_STRENGTH = 10;
+    private final float MAX_STRENGTH = 11;
     private final float RESURRECT_PROB = (float) 0.3;
     private final int WEAPONS_REWARD = 2;
     private final int SHIELDS_REWARD = 3;
@@ -78,7 +78,7 @@ public class Dice {
    
    boolean discardElement(int usesLeft){
        boolean discard = false;
-       if (generator.nextFloat()<=1/usesLeft){
+       if (generator.nextFloat()<=MAX_USES/(float)usesLeft){
            discard = true;
        }
        return discard;
