@@ -92,7 +92,7 @@ public class TestP1 {
         
         System.out.println("Tras "+num+" intentos, la probabilidad calculada de resurrección es de: "+p+"\n");
         
-        System.out.println("Descartar armas:");
+        System.out.println("Descartar elementos:");
         
         num=10;
         for(int i = 0; i<num; i++){
@@ -128,6 +128,10 @@ public class TestP1 {
             }
             
         }
+        
+        System.out.println("Descartar armas y escudos:");
+        
+        
         
         //Prueba de los Structs
         System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n");
