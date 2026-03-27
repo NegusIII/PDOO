@@ -6,93 +6,86 @@ package irrgarten;
  */
 public class Game {
     
-    private final char BLOCK_CHAR='X';
-    private final char EMPTY_CHAR='-';
-    private final char MONSTER_CHAR='M';
-    private final char COMBAT_CHAR='C';
-    private final char EXIT_CHAR='E';
-    private final int ROW=0;
-    private final int COL=1;
+    private final int MAX_ROUNDS=10;
     
-    private int nRows;
-    private int nCols;
-    private int exitRow;
-    private int exitCol;
     
-    Labyrinth(int nFilas, int nColumnas, int FilaSalida, int columnaSalida){
-        nRows=nFilas;
-        nCols=nColumnas;
-        exitRow=filaSalida;
-        exitCol=columnaSalida;
-    }
+    private String log;
     
-    public void spreadPlayers(ArrayList<Player> players){
+    private Labyrinth labyrinth;
+    private ArrayList<Monster> monsters;
+    private Player currentPlayer;
+    private ArrayList<Player> players;
+    
+    // Métodos públicos de la clase Game
+    
+    Game(int nplayers){
         
     }
     
-    public boolean haveAWinner(){
+    public boolean finished(){
         
     }
     
-    public String toString(){
+    public boolean nextStep(Directions preferredDirection){
         
     }
     
-    public void addMonster(int row, int col, Monster monster){
+    public GameState getGameState(){
         
     }
     
-    public Monster putPlayer(Directions direction, Player player){
+    //Métodos privados de la clase Game
+    
+    private void configureLabyrinth(){
         
     }
     
-    public void addBlock(Orientation orientation, int startRow, int startCol, int length){
+    private void nextPlayer(){
         
     }
     
-    public ArrayList<Directions> validMoves(int row, int col){
+    private Directions actualDirection(Directions preferredDirection){
         
     }
     
-    // Métodos privados
-    
-    private boolean posOK(int row, int col){
+    private GameCharacter combat(Monster monster){
         
     }
     
-    private boolean emptyPos(int row, int col){
+    private void manageReward(GameCharacter winner){
         
     }
     
-    private boolean monsterPos(int row, int col){
+    private void manageResurrection(){
         
     }
     
-    private boolean exitPos(int row, int col){
+    private void logPlayerWon(){
         
     }
     
-    private boolean combatPos(int row, int col){
+    private void logMonsterWon(){
         
     }
     
-    private boolean canStepOn(int row, int col){
+    private void logResurrected(){
         
     }
     
-    private void updateOldPos(int row, int col){
+    private void logPlayerSkipTurn(){
         
     }
     
-    private ArrayList<int> dir2Pos(int row, int col, Directions direction){
+    private void logPlayerNoOrders(){
         
     }
     
-    private ArrayList<int> randomEmptyPos(){
+    private void logNoMonster(){
         
     }
     
-    private Monster putPlayer2D(int oldRow, int oldCol, int row, int col. Player player){
+    private void logRounds(int rounds, int max){
         
     }
+    
 }
