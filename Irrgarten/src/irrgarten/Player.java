@@ -1,4 +1,5 @@
 package irrgarten;
+import java.util.ArrayList;
 
 /**
  *
@@ -50,8 +51,65 @@ public class Player {
         
     }
     
-    public Directions move(Directions direction, Directions validMoves){
+    public Directions move(Directions direction, ArrayList<Directions> validMoves){
+        
+    }
+    public float attack(){
         
     }
     
+    public boolean defend(float receivedAttack){
+        
+    }
+    
+    public void receiveReward(){
+        
+    }
+    
+    public String toString(){
+        
+    }
+    
+    private void receiveWeapon(Weapon w){
+        
+    }
+    
+    private void receiveShield(Shield s){
+        
+    }
+    
+    private Weapon newWeapon(){
+        
+    }
+    
+    private Shield newShield(){
+        
+    }
+    
+    private float sumWeapon(){
+        
+    }
+    
+    private float sumShield(){
+        
+    }
+    
+    private float defensiveEnergy(){
+        
+    }
+    
+    private boolean manageHit(float receivedAttack){
+        
+    }
+    
+    private void resetHits(){
+        
+    }
+    
+    private void gotWounded(){
+        
+    }
+    private void incConsecutiveHits(){
+        
+    }
 }
