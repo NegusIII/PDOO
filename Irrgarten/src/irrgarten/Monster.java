@@ -27,7 +27,7 @@ public class Monster {
         intelligence=inteligencia;
         strength=fuerza;
         health=INITIAL_HEALTH;
-        row=col=INVALID_POS
+        row=col=INVALID_POS;
     }
     
     public boolean dead(){
@@ -49,7 +49,7 @@ public class Monster {
     }
     
     public String toString(){
-        return "M["+name+", "+intelligence+", "+strength+", "+health+",("+row+", "+col+")]";
+        return "M["+name+". i:"+intelligence+", s:"+strength+", h:"+health+", p:("+row+", "+col+")]";
     }
     
     private void gotWounded(){
