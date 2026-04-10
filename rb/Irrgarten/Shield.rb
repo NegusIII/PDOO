@@ -6,7 +6,7 @@ module Irrgarten
         @uses
 
         def initialize(protection, uses)
-            @power = protection
+            @protection = protection
             @uses = uses
         end
 
