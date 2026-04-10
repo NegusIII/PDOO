@@ -93,19 +93,35 @@ public class Player {
     }
     
     private Weapon newWeapon(){
-        
+        Dice dado = new Dice();
+        float power = dado.weaponPower();
+        int usos=dado.usesLeft();
+        Weapon arma = new Weapon(power, usos);
+        return arma;
     }
     
     private Shield newShield(){
-        
+        Dice dado = new Dice();
+        float protection = dado.shieldPower();
+        int uses=dado.usesLeft();
+        Shield escudo = new Shield(protection, usos);
+        return escudo;
     }
     
     private float sumWeapon(){
-        
+        float suma = 0;
+        for (int i = 0; i < weapons.size(); i++){
+           suma += weapons.get(i).attack();
+        }
+        return suma;
     }
     
     private float sumShield(){
-        
+        float suma = 0;
+        for (int i = 0; i < shields.size(); i++){
+           suma += shields.get(i).protect();
+        }
+        return suma;
     }
     
     private float defensiveEnergy(){
