@@ -16,7 +16,7 @@ public class Monster {
     private String name;
     private float intelligence;
     private float strength;
-    private float health;
+    private float health;   
     private int row;
     private int col;
     

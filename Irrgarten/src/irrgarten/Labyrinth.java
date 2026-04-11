@@ -35,7 +35,7 @@ public class Labyrinth {
     }
     
     public void spreadPlayers(ArrayList<Player> players){
-        
+        throw new UnsupportedOperationException();
     }
     
     public boolean haveAWinner(){
@@ -62,15 +62,15 @@ public class Labyrinth {
     }
     
     public Monster putPlayer(Directions direction, Player player){
-        
+        throw new UnsupportedOperationException();
     }
     
     public void addBlock(Orientation orientation, int startRow, int startCol, int length){
-        
+        throw new UnsupportedOperationException();
     }
     
     public ArrayList<Directions> validMoves(int row, int col){
-        
+        throw new UnsupportedOperationException();
     }
     
     // Métodos privados
@@ -144,7 +144,7 @@ public class Labyrinth {
     }
     
     private Monster putPlayer2D(int oldRow, int oldCol, int row, int col. Player player){
-        return null;
+        throw new UnsupportedOperationException();
     }
     
 }

@@ -72,11 +72,11 @@ public class Player {
     }
     
     public boolean defend(float receivedAttack){
-        
+        throw new UnsupportedOperationException();
     }
     
     public void receiveReward(){
-        
+        throw new UnsupportedOperationException();
     }
     
     public String toString(){
@@ -85,11 +85,11 @@ public class Player {
     }
     
     private void receiveWeapon(Weapon w){
-        
+        throw new UnsupportedOperationException();
     }
     
     private void receiveShield(Shield s){
-        
+        throw new UnsupportedOperationException();
     }
     
     private Weapon newWeapon(){

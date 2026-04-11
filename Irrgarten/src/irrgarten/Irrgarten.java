@@ -12,8 +12,8 @@ public class Irrgarten {
 
     public static void main(String[] args) {
         
-        TestP1 test = new TestP1();
-        test.main();
+        //TestP1 test = new TestP1();
+        //test.main();
     }
     
 }
