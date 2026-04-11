@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class Game {
     
     private final int MAX_ROUNDS=10;
+    private int currentPlayerIndex;
     
     
     private String log;
@@ -29,7 +30,8 @@ public class Game {
         }
         
         // Decidir quién empieza
-        currentPlayer=players.get(dado.whoStarts(nplayers));
+        currentPlayerIndex=dado.whoStarts(nplayers);
+        currentPlayer=players.get(currentPlayerIndex);
         
         monsters = new ArrayList();
         labyrinth = new Labyrinth(4,4,2,3);
@@ -51,7 +53,7 @@ public class Game {
     
     public GameState getGameState(){
         GameState estado = new GameState(labyrinth.toString(), players.toString(), 
-        monsters.toString(), (int)currentPlayer.getNumber(), this.finished(), log);
+        monsters.toString(), currentPlayerIndex, this.finished(), log);
         return estado;
     }
     //Métodos privados de la clase Game
@@ -60,19 +62,21 @@ public class Game {
         Dice dado = new Dice();
         Monster monstruo1= new Monster("Netanyahu", dado.randomIntelligence(), dado.randomStrength());
         Monster monstruo2= new Monster("Bin Laden", dado.randomIntelligence(), dado.randomStrength());
+        Monster monstruo3= new Monster("Khamenei", dado.randomIntelligence(), dado.randomStrength());
         
         labyrinth.addMonster(3,3,monstruo1);
-        labyrinth.addMonster(3,1,monstruo1);
+        labyrinth.addMonster(3,1,monstruo2);
+        labyrinth.addMonster(3,0,monstruo3);
         
         //Falta colocar bloques de obstáculos
         
     }
     
     private void nextPlayer(){
-        if ((int)currentPlayer.getNumber()==players.size()-1){
+        if (currentPlayerIndex==players.size()-1){
             currentPlayer = players.get(0);
         }
-        else currentPlayer = players.get((int)currentPlayer.getNumber()+1);
+        else currentPlayer = players.get(currentPlayerIndex+1);
     }
     
     private Directions actualDirection(Directions preferredDirection){

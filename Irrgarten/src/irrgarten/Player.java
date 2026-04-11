@@ -68,7 +68,7 @@ public class Player {
     }
     
     public float attack(){
-        
+        return (this.strength+this.sumWeapon());
     }
     
     public boolean defend(float receivedAttack){
@@ -104,7 +104,7 @@ public class Player {
         Dice dado = new Dice();
         float protection = dado.shieldPower();
         int uses=dado.usesLeft();
-        Shield escudo = new Shield(protection, usos);
+        Shield escudo = new Shield(protection, uses);
         return escudo;
     }
     
@@ -125,7 +125,7 @@ public class Player {
     }
     
     private float defensiveEnergy(){
-        
+        return (this.intelligence+this.sumShield());
     }
     
     private boolean manageHit(float receivedAttack){

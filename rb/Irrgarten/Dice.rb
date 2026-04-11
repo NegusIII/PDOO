@@ -62,8 +62,8 @@ module Irrgarten
             return @@generator.rand(competence)
         end
 
-        def discard_element(usesLeft)
-            return (@@generator.rand()>usesLeft.to_f/@@MAX_USES)
+        def discard_element(uses_left)
+            return (@@generator.rand()>uses_left.to_f/@@MAX_USES)
         end
     end
 end

@@ -2,15 +2,13 @@
 
 module Irrgarten
     class Shield
-        @protection
-        @uses
 
         def initialize(protection, uses)
             @protection = protection
             @uses = uses
         end
 
-        def attack
+        def protect
             if @uses > 0
                 uses-=1
                 return @protection
