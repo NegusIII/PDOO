@@ -36,7 +36,7 @@ module Irrgarten
 
             @n_rows.times do |i|
                 @n_cols.times do |j|
-                    s+= "#{@labyrinth[i][j]} "
+                    s+= "[#{@labyrinth[i][j]}]"
                 end
                 s+="\n"
             end
@@ -115,7 +115,7 @@ module Irrgarten
         def random_empty_pos
             empty=false
             dado =Dice.new
-            pos={0,0}
+            pos=[0,0]
 
             while (empty==false) do
                 pos[ROW]=dado.random_pos(n_rows)

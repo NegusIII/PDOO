@@ -31,7 +31,17 @@ public class Labyrinth {
         this.exitRow=exitRow;
         this.exitCol=exitCol;
         
-        labyrinth[exitRow][exitCol]=EXIT_CHAR;
+        monsters = new Monster[nRows][nCols];
+        players = new Player[nRows][nCols];
+        labyrinth = new char[nRows][nCols];
+        
+        for (int i = 0; i < nRows; i++) {
+            for (int j = 0; j < nCols; j++) {
+                labyrinth[i][j] = EMPTY_CHAR;
+            }
+        }
+        
+        this.labyrinth[exitRow][exitCol] = EXIT_CHAR;
     }
     
     public void spreadPlayers(ArrayList<Player> players){
@@ -142,9 +152,9 @@ public class Labyrinth {
         }
         return pos;
     }
-    
+   /* 
     private Monster putPlayer2D(int oldRow, int oldCol, int row, int col. Player player){
         throw new UnsupportedOperationException();
     }
-    
+    */
 }

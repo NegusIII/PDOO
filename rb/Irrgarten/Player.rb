@@ -48,7 +48,7 @@ module Irrgarten
         end
 
         def dead
-            return health==0.0
+            return @health==0.0
         end
 
         def move
@@ -67,7 +67,7 @@ module Irrgarten
         end
 
         def to_string
-            "M[#{@name}: I#{@intelligence}, S#{@strength}, H#{@health}, Ch#{@consecutive_hits}, P(#{@row},#{@col})]"
+            "P[#{@name}: I#{@intelligence}, S#{@strength}, H#{@health}, Ch#{@consecutive_hits}, P(#{@row},#{@col})]"
         end
 
 
@@ -125,7 +125,7 @@ module Irrgarten
         end
 
         def inc_consecutive_hits
-            @consecutive_hits++
+            @consecutive_hits+=1
         end
     end
 end

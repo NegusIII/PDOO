@@ -15,17 +15,17 @@ module Irrgarten
 
             n_players.times do |i|
                 actual = Player.new(i, dado.random_intelligence, dado.random_strength)
-                players < actual
+                @players << actual
             end
             @current_player_index=dado.who_starts(n_players)
-            @current_player=players[@current_player_index]
+            @current_player=@players[@current_player_index]
 
             configure_labyrinth
-            labyrinth.spread_players(players)
+            #@labyrinth.spread_players(@players)
         end
 
         def finished
-            return labyrinth.have_a_winner
+            return @labyrinth.have_a_winner
         end
 
         def next_step
@@ -37,7 +37,7 @@ module Irrgarten
             laberinto = @labyrinth.to_string
             jugadores = @players.map { |p| p.to_s }.join("\n")
             monstruos = @monsters.map { |m| m.to_s }.join("\n")
-            estado = GameState.new(laberinto_str, jugadores_str, monstruos_str, @current_player, finished, @log)
+            estado = GameState.new(laberinto, jugadores, monstruos, @current_player, finished, @log)
 
             return estado
         end
@@ -62,7 +62,7 @@ module Irrgarten
             if (@current_player_index==@players.size-1)
                 @current_player_index=0
             else
-                @current_player_index++
+                @current_player_index+=1
             end
 
             @current_player = @players[@current_player_index]

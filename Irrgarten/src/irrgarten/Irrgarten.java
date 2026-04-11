@@ -14,6 +14,9 @@ public class Irrgarten {
         
         //TestP1 test = new TestP1();
         //test.main();
+        
+        TestP2 test = new TestP2();
+        test.main();
     }
     
 }

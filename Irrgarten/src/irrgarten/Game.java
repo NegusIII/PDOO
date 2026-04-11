@@ -23,9 +23,11 @@ public class Game {
     Game(int nplayers){
         
         // Generar los jugadores
+        
+        this.players = new ArrayList<>();
         Dice dado = new Dice();
         for (int i = 0; i < nplayers; i++){
-            Player actual = new Player((char)i,dado.randomIntelligence(), dado.randomStrength());
+            Player actual = new Player((char)(i+'0'),dado.randomIntelligence(), dado.randomStrength());
             players.add(actual);
         }
         
@@ -38,8 +40,8 @@ public class Game {
         
         log="";
         
-        configureLabyrinth();
-        labyrinth.spreadPlayers(players);
+        //configureLabyrinth();
+        //labyrinth.spreadPlayers(players);
         
     }
     
@@ -48,7 +50,7 @@ public class Game {
     }
     
     public boolean nextStep(Directions preferredDirection){
-        
+        throw new UnsupportedOperationException();
     }
     
     public GameState getGameState(){
@@ -74,25 +76,28 @@ public class Game {
     
     private void nextPlayer(){
         if (currentPlayerIndex==players.size()-1){
-            currentPlayer = players.get(0);
+            currentPlayerIndex=0;
         }
-        else currentPlayer = players.get(currentPlayerIndex+1);
+       
+        else  currentPlayerIndex++;
+        
+        currentPlayer = players.get(currentPlayerIndex);
     }
     
     private Directions actualDirection(Directions preferredDirection){
-        
+        throw new UnsupportedOperationException();
     }
     
     private GameCharacter combat(Monster monster){
-        
+        throw new UnsupportedOperationException();
     }
     
     private void manageReward(GameCharacter winner){
-        
+        throw new UnsupportedOperationException();
     }
     
     private void manageResurrection(){
-        
+        throw new UnsupportedOperationException();
     }
     
     private void logPlayerWon(){

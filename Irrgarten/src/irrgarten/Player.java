@@ -33,6 +33,9 @@ public class Player {
         
         health=INITIAL_HEALTH;
         name="Player#"+number;
+        
+        this.weapons = new ArrayList<>();
+        this.shields = new ArrayList<>();
     }
     
     public void resurrect(){

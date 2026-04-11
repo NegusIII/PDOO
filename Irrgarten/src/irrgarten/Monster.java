@@ -22,10 +22,10 @@ public class Monster {
     
     // Métodos públicos de la clase Monster
     
-    Monster(String name, float intelligence, float strenght){
+    Monster(String name, float intelligence, float strength){
         this.name=name;
         this.intelligence=intelligence;
-        this.strength=strenght;
+        this.strength=strength;
         health=INITIAL_HEALTH;
         row=col=INVALID_POS;
     }
