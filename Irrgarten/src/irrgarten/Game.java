@@ -50,7 +50,35 @@ public class Game {
     }
     
     public boolean nextStep(Directions preferredDirection){
-        throw new UnsupportedOperationException();
+        log ="";
+        boolean dead = currentPlayer.dead();
+        
+        if (!dead){
+            
+            Directions direction = this.actualDirection(preferredDirection);
+            if (direction != preferredDirection){
+                logPlayerNoOrders();
+            }
+            Monster monster = labyrinth.putPlayer(direction, currentPlayer);
+            
+            if (monster == null){
+                this.logNoMonster();
+            }
+            else{
+                GameCharacter winner = combat(monster);
+                this.manageReward(winner);
+            }
+            
+        }
+        else this.manageResurrection();
+        
+        boolean endGame = this.finished();
+        
+        if (!endGame){
+            this.nextPlayer();
+        }
+        
+        return endGame;
     }
     
     public GameState getGameState(){
@@ -85,19 +113,57 @@ public class Game {
     }
     
     private Directions actualDirection(Directions preferredDirection){
-        throw new UnsupportedOperationException();
+        int row = currentPlayer.getRow();
+        int col = currentPlayer.getCol();
+        
+        ArrayList<Directions> validMoves=labyrinth.validMoves(row,col);
+        
+        return currentPlayer.move(preferredDirection, validMoves);
     }
     
     private GameCharacter combat(Monster monster){
-        throw new UnsupportedOperationException();
+        int rounds = 0;
+        GameCharacter winner = GameCharacter.PLAYER;
+        
+        float playerAttack=currentPlayer.attack();
+        boolean lose = monster.defend(playerAttack);
+        
+        while (!lose && (rounds < MAX_ROUNDS)){
+            winner = GameCharacter.MONSTER;
+            rounds++;
+            
+            float monsterAttack = monster.attack();
+            lose = currentPlayer.defend(monsterAttack);
+            
+            if (!lose){
+                playerAttack = currentPlayer.attack();
+                winner = GameCharacter.PLAYER;
+                lose = monster.defend(playerAttack);
+            }
+        }
+        this.logRounds(rounds, MAX_ROUNDS);
+        return winner;
     }
     
     private void manageReward(GameCharacter winner){
-        throw new UnsupportedOperationException();
+        
+        if (winner==GameCharacter.PLAYER){
+            currentPlayer.receiveReward();
+            this.logPlayerWon();
+        }
+        else this.logMonsterWon();
     }
     
     private void manageResurrection(){
-        throw new UnsupportedOperationException();
+        Dice dado = new Dice();
+        
+        boolean resurrect = dado.resurrectPlayer();
+        
+        if (resurrect){
+            currentPlayer.resurrect();
+            this.logResurrected();
+        }
+        else this.logPlayerSkipTurn();
     }
     
     private void logPlayerWon(){

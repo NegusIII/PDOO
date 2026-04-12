@@ -40,7 +40,19 @@ public class Monster {
     }
     
     public boolean defend(float receivedAttack){
-        return false;
+        boolean isDead= this.dead();
+        
+        if (!isDead){
+            Dice dado = new Dice();
+            
+            float defensiveEnergy = dado.intensity(intelligence);
+            
+            if(defensiveEnergy < receivedAttack){
+                this.gotWounded();
+                isDead=this.dead();
+            }
+        }
+        return isDead;
     }
     
     public void setPos(int row, int col){

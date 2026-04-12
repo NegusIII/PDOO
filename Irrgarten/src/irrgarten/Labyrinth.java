@@ -45,7 +45,12 @@ public class Labyrinth {
     }
     
     public void spreadPlayers(ArrayList<Player> players){
-        throw new UnsupportedOperationException();
+        
+        for (int i = 0; i < players.size(); i++){
+            Player p = players.get(i);
+            int [] pos = this.randomEmptyPos();
+            putPlayer2D(-1,-1,pos[ROW],pos[COL],p);
+        }
     }
     
     public boolean haveAWinner(){
@@ -72,15 +77,55 @@ public class Labyrinth {
     }
     
     public Monster putPlayer(Directions direction, Player player){
-        throw new UnsupportedOperationException();
+        int oldRow=player.getRow();
+        int oldCol=player.getCol();
+        
+        int[]newPos=this.dir2Pos(oldRow,oldCol,direction);
+        Monster monster = this.putPlayer2D(oldRow,oldCol,newPos[ROW],newPos[COL],player);
+        return monster;
     }
     
     public void addBlock(Orientation orientation, int startRow, int startCol, int length){
-        throw new UnsupportedOperationException();
+        int incRow, incCol;
+        if (orientation == Orientation.VERTICAL){
+            incRow=1;
+            incCol=0;
+        }
+        else{
+            incRow=0;
+            incCol=1;
+        }
+        int row=startRow;
+        int col=startCol;
+        
+        while(posOK(row,col) && emptyPos(row,col) && length>0){
+            labyrinth[row][col]=BLOCK_CHAR;
+            
+            length-=1;
+            row+=incRow;
+            col+=incCol;
+        }
     }
     
     public ArrayList<Directions> validMoves(int row, int col){
-        throw new UnsupportedOperationException();
+        ArrayList<Directions> output = new ArrayList<>();
+        
+        if (canStepOn(row+1,col)){
+            output.add(Directions.DOWN);
+        }
+        
+        if (canStepOn(row-1,col)){
+            output.add(Directions.UP);
+        }
+        
+        if (canStepOn(row,col+1)){
+            output.add(Directions.RIGHT);
+        }
+        
+        if (canStepOn(row,col+1)){
+            output.add(Directions.LEFT);
+        }
+        return output;
     }
     
     // Métodos privados
@@ -152,9 +197,34 @@ public class Labyrinth {
         }
         return pos;
     }
-   /* 
-    private Monster putPlayer2D(int oldRow, int oldCol, int row, int col. Player player){
-        throw new UnsupportedOperationException();
+
+    
+    private Monster putPlayer2D(int oldRow, int oldCol, int row, int col, Player player){
+       Monster output=null;
+       
+       if (canStepOn(row,col)){
+           if (posOK(row,col)){
+               Player p = players[oldRow][oldCol];
+               if (p==player){
+                   this.updateOldPos(oldRow, oldCol);
+                   players[oldRow][oldCol]= null;
+               }
+           }
+           
+           boolean monsterPos = this.monsterPos(row,col);
+           
+           if (monsterPos){
+               labyrinth[row][col]=COMBAT_CHAR;
+               output = monsters[row][col];
+           }
+           else{
+               char number=player.getNumber();
+               labyrinth[row][col]=number;
+           }
+           
+           players[row][col]=player;
+           player.setPos(row,col);
+       }
+       return output;
     }
-    */
 }
