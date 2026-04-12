@@ -3,6 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
 package irrgarten;
+import irrgarten.UI.TextUI;
+import irrgarten.controller.Controller;
 
 /**
  *
@@ -15,8 +17,16 @@ public class Irrgarten {
         //TestP1 test = new TestP1();
         //test.main();
         
-        TestP2 test = new TestP2();
-        test.main();
+        //TestP2 test = new TestP2();
+        //test.main();
+        
+        int nPlayers=3;
+        
+        Game game = new Game(nPlayers);
+        TextUI view = new TextUI();
+        Controller controller = new Controller(game,view);
+        
+        controller.play();
     }
     
 }

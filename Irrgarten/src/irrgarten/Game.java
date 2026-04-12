@@ -36,12 +36,12 @@ public class Game {
         currentPlayer=players.get(currentPlayerIndex);
         
         monsters = new ArrayList();
-        labyrinth = new Labyrinth(4,4,2,3);
+        labyrinth = new Labyrinth(4,7,2,3);
         
         log="";
         
-        //configureLabyrinth();
-        //labyrinth.spreadPlayers(players);
+        configureLabyrinth();
+        labyrinth.spreadPlayers(players);
         
     }
     

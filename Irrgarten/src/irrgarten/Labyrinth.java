@@ -61,7 +61,8 @@ public class Labyrinth {
         String laberinto = "";
         for (int i = 0; i< nCols; i++){
             for (int j = 0; j < nRows; j++){
-                laberinto += "[" + labyrinth[i][j] + "]";
+                if (posOK(i,j))
+                    laberinto += "[" + labyrinth[i][j] + "]";
             }
             laberinto += "\n";
         }
