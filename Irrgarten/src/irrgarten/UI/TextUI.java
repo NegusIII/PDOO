@@ -52,12 +52,17 @@ public class TextUI {
     public void showGame(GameState gameState) {  
         String game="Game:\n";
         game+=gameState.getLabyrinth()+"\n";
+        game+="Current Player:" + gameState.getCurrentPlayer() + "\n";
         game+="Players:\n";
         game+=gameState.getPlayers()+"\n";
         game+="Monsters:\n";
         game+=gameState.getMonsters()+"\n";
         game+="Log:";
         game+=gameState.getLog()+"\n";
+        
+        if (gameState.isWinner()){
+            game+="Game has finished";
+        }
         
         System.out.println(game);
     }

@@ -82,7 +82,7 @@ public class Player {
     }
     
     public boolean defend(float receivedAttack){
-        throw new UnsupportedOperationException();
+        return this.manageHit(receivedAttack);
     }
     
     public void receiveReward(){
@@ -105,8 +105,15 @@ public class Player {
     }
     
     public String toString(){
-        return "P["+name+". i:"+intelligence+", s:"+strength+", h:"+health+
-                ", cH:"+consecutiveHits+"p:("+row+", "+col+")]";
+        String s="P["+name+". i:"+intelligence+", s:"+strength+", h:"+health+
+                ", cH:"+consecutiveHits+"p:("+row+", "+col+")]:\n";
+        for(int i = 0; i<weapons.size();i++){
+            s+=weapons.get(i).toString()+"\n";
+        }
+        for(int i = 0; i<shields.size();i++){
+            s+=shields.get(i).toString()+"\n";
+        }
+        return s;
     }
     
     private void receiveWeapon(Weapon w){

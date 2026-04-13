@@ -59,8 +59,8 @@ public class Labyrinth {
     
     public String toString(){
         String laberinto = "";
-        for (int i = 0; i< nCols; i++){
-            for (int j = 0; j < nRows; j++){
+        for (int i = 0; i < nRows; i++){
+            for (int j = 0; j < nCols; j++){
                 if (posOK(i,j))
                     laberinto += "[" + labyrinth[i][j] + "]";
             }
@@ -123,7 +123,7 @@ public class Labyrinth {
             output.add(Directions.RIGHT);
         }
         
-        if (canStepOn(row,col+1)){
+        if (canStepOn(row,col-1)){
             output.add(Directions.LEFT);
         }
         return output;
@@ -152,7 +152,7 @@ public class Labyrinth {
     }
     
     private boolean canStepOn(int row, int col){
-        return (posOK(row,col)&&(monsterPos(row, col)||exitPos(row,col)||combatPos(row,col)));
+        return (posOK(row,col)&&(monsterPos(row, col)||exitPos(row,col)||emptyPos(row,col)));
     }
     
     private void updateOldPos(int row, int col){
@@ -191,7 +191,7 @@ public class Labyrinth {
         Dice dado = new Dice();
         int pos[]={0,0};
         
-        while (empty=false){
+        while (empty==false){
             pos[ROW]=dado.randomPos(nRows);
             pos[COL]=dado.randomPos(nCols);
             empty=emptyPos(pos[ROW],pos[COL]);
@@ -204,7 +204,7 @@ public class Labyrinth {
        Monster output=null;
        
        if (canStepOn(row,col)){
-           if (posOK(row,col)){
+           if (posOK(oldRow,oldCol)){
                Player p = players[oldRow][oldCol];
                if (p==player){
                    this.updateOldPos(oldRow, oldCol);

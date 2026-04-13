@@ -36,7 +36,7 @@ public class Game {
         currentPlayer=players.get(currentPlayerIndex);
         
         monsters = new ArrayList();
-        labyrinth = new Labyrinth(4,7,2,3);
+        labyrinth = new Labyrinth(7,5,2,3);
         
         log="";
         
@@ -82,8 +82,18 @@ public class Game {
     }
     
     public GameState getGameState(){
-        GameState estado = new GameState(labyrinth.toString(), players.toString(), 
-        monsters.toString(), currentPlayerIndex, this.finished(), log);
+        String playersStr="";
+        String monstersStr="";
+        
+        for (int i = 0; i < players.size(); i++){
+            playersStr+=players.get(i).toString()+"\n";
+        }
+        for (int i = 0; i < players.size(); i++){
+            monstersStr+=monsters.get(i).toString()+"\n";
+        }
+        
+        GameState estado = new GameState(labyrinth.toString(), playersStr, 
+        monstersStr, currentPlayerIndex, this.finished(), log);
         return estado;
     }
     //Métodos privados de la clase Game
@@ -95,11 +105,14 @@ public class Game {
         Monster monstruo3= new Monster("Khamenei", dado.randomIntelligence(), dado.randomStrength());
         
         labyrinth.addMonster(3,3,monstruo1);
-        labyrinth.addMonster(3,1,monstruo2);
-        labyrinth.addMonster(3,0,monstruo3);
+        labyrinth.addMonster(1,4,monstruo2);
+        labyrinth.addMonster(5,2,monstruo3);
+        monsters.add(monstruo1);
+        monsters.add(monstruo2);
+        monsters.add(monstruo3);
         
-        //Falta colocar bloques de obstáculos
-        
+        labyrinth.addBlock(Orientation.HORIZONTAL, 2,0,3);
+        labyrinth.addBlock(Orientation.HORIZONTAL, 1,3,1);
     }
     
     private void nextPlayer(){
