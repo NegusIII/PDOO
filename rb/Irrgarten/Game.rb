@@ -28,8 +28,29 @@ module Irrgarten
             return @labyrinth.have_a_winner
         end
 
-        def next_step
-
+        def next_step(preferred_direction)
+            log = ""
+            boolean dead = @current_player.dead
+            if (!dead)
+                direction = actual_direction(preferred_direction)
+                if (direction != preferred_direction)
+                    log_player_no_orders
+                end
+                monster = @labyrinth.put_player(direction, @current_player)
+                if (monster == nil)
+                    log_no_monster
+                else
+                    winner = combat(monster)
+                    manage_reward(winner)
+                end
+            else
+                manage_resurrection
+            end
+            end_game=finished
+            if (!end_game)
+                next_player
+            end
+            end_game
         end
 
         def get_game_state
@@ -68,16 +89,56 @@ module Irrgarten
             @current_player = @players[@current_player_index]
         end
 
-        def actual_direction
+        def actual_direction(preferredDirection)
+            current_row=@current_player.get_row()
+            current_col=@current_player.get_col()
+
+            valid_moves = labyrinth.valid_moves(current_row,current_col)
+            output = move(preferredDirection,valid_moves)
+            output
         end
 
         def combat(monster)
+            rounds = 0
+            winner = GameCharacter::PLAYER
+
+            player_attack=@current_player.attack
+            lose = monster.defend(player_attack)
+
+            while (!lose && rounds < MAX_ROUNDS) do
+                rounds+=1
+                winner=GameCharacter::MONSTER
+                monster_attack=monster.attack
+                lose = @current_player.defend(monster_attack)
+
+                if (!lose)
+                    winner=GameCharacter::PLAYER
+                    player_attack=@current_player.attack
+                    lose = monster.defend(player_attack)
+                end
+            end
+            log_rounds
+            winner
         end
 
         def manage_reward(winner)
+            if (winner==GameCharacter::PLAYER)
+                @current_player.receive_reward
+                log_player_won
+            else
+                log_monster_won
+            end
         end
 
         def manage_resurrection
+            dado = Dice.new
+            resurrect = dado.resurrect_player
+            if (resurrect)
+                @current_player.resurrect
+                log_resurrected
+            else
+                log_player_skip_turn
+            end
         end
 
         def log_player_won

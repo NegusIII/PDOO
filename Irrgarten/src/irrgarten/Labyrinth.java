@@ -57,6 +57,7 @@ public class Labyrinth {
         return players[exitRow][exitCol] != null;
     }
     
+    @Override
     public String toString(){
         String laberinto = "";
         for (int i = 0; i < nRows; i++){

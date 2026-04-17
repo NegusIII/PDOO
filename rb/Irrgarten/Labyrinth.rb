@@ -2,13 +2,13 @@
 
 module Irrgarten
     class Labyrinth
-        BLOCK_CHAR='X'
-        EMPTY_CHAR='-'
-        MONSTER_CHAR='M'
-        COMBAT_CHAR='C'
-        EXIT_CHAR='E'
-        ROW=0
-        COL=1
+        @@BLOCK_CHAR='X'
+        @@EMPTY_CHAR='-'
+        @@MONSTER_CHAR='M'
+        @@COMBAT_CHAR='C'
+        @@EXIT_CHAR='E'
+        @@ROW=0
+        @@COL=1
 
         def initialize(n_rows, n_cols, exit_row, exit_col)
             @n_rows=n_rows
@@ -24,6 +24,9 @@ module Irrgarten
         end
 
         def spread_players
+            @players.each do |p|
+                pos = random_empty_pos
+                put_player_2d (-1,-1,pos[@@ROW],pos[@@COL],p)
         end
 
         def have_a_winner
@@ -45,19 +48,54 @@ module Irrgarten
 
         def add_monster(row,col,monster)
             if(pos_ok(row,col))
-                @labyrinth[row][col]=MONSTER_CHAR
+                @labyrinth[row][col]=@@MONSTER_CHAR
                 @monsters[row][col]=monster
                 monster.set_pos(row,col)
             end
         end
 
         def put_player(direction,player)
+            old_row=player.get_row
+            old_col=player.get_col
+
+            new_pos=dir_2_pos(old_row,old_col,direction)
+            put_player_2d(old_row,old_col,new_pos[ROW],new_pos[COL],player)
         end
 
-        def add_block(orientation, start_row, start_col)
+        def add_block(orientation, start_row, start_col, length)
+            if (orientation==Orientation::VERTICAL)
+                inc_row=1
+                inc_col=0
+            else
+                inc_row=0
+                inc_col=1
+            end
+            row=start_row
+            col=start_col
+            while (pos_ok(row,col) && empty_pos(row,col) && lenght>0) do
+                @labyrinth [row][col]=@@BLOCK_CHAR
+                length=lenght-1
+                row+=inc_row
+                col+=inc_col
+            end
         end
 
         def valid_moves(row,col)
+            output = Array.new
+            if (can_step_on(row+1,col))
+                output << Directions::DOWN
+            end
+            if (can_step_on(row-1,col))
+                output << Directions::UP
+            end
+
+            if (can_step_on(row,col+1))
+                output << Directions::RIGHT
+            end
+            if (can_step_on(row,col-1))
+                output << Directions::LEFT
+            end
+            output
         end
 
 
@@ -118,14 +156,34 @@ module Irrgarten
             pos=[0,0]
 
             while (empty==false) do
-                pos[ROW]=dado.random_pos(n_rows)
-                pos[COL]=dado.random_pos(n_cols)
-                empty=empty_pos(pos[ROW],pos[COL])
+                pos[@@ROW]=dado.random_pos(n_rows)
+                pos[@@COL]=dado.random_pos(n_cols)
+                empty=empty_pos(pos[@@ROW],pos[@@COL])
             end
             return pos
         end
 
         def put_player_2d(old_row,old_col,row,col,player)
+            output=nil
+            if (can_step_on(row,col))
+                if (posOK(old_row,old_col))
+                    p=@players[old_row][old_row]
+                    if (p==player)
+                        update_old_pos(old_row,old_col)
+                        @players[old_row][old_col]=nil
+                    end
+                end
+                monster_pos = monster_pos(row,col)
+                if (monster_pos)
+                    @labyrinth[row][col]=@@COMBAT_CHAR
+                    output = @monsters[row][col]
+                else
+                    number=player.get_number()
+                    @labyrinth[row][col]=number
+                end
+            end
+            output
         end
+
     end
 end

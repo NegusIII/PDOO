@@ -60,6 +60,7 @@ public class Monster {
         this.col=col;
     }
     
+    @Override
     public String toString(){
         return "M["+name+". i:"+intelligence+", s:"+strength+", h:"+health+", p:("+row+", "+col+")]";
     }

@@ -104,6 +104,7 @@ public class Player {
         health+=extraHealth;
     }
     
+    @Override
     public String toString(){
         String s="P["+name+". i:"+intelligence+", s:"+strength+", h:"+health+
                 ", cH:"+consecutiveHits+"p:("+row+", "+col+")]:\n";
@@ -117,7 +118,6 @@ public class Player {
     }
     
     private void receiveWeapon(Weapon w){
-        Dice dado = new Dice();
         for (int i = 0; i < weapons.size(); i++){
             Weapon wi = weapons.get(i);
             boolean discard = wi.discard();
@@ -133,7 +133,6 @@ public class Player {
     }
     
     private void receiveShield(Shield s){
-        Dice dado = new Dice();
         for (int i = 0; i < shields.size(); i++){
             Shield si = shields.get(i);
             boolean discard = si.discard();

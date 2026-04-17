@@ -25,6 +25,7 @@ public class Weapon {
         return intensity;
     }
     
+    @Override
     public String toString(){
         String s="W[";
         s= s + power + ","+ uses;

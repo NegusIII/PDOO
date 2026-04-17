@@ -27,6 +27,7 @@ public class Shield {
         return intensity;
     }
     
+    @Override
     public String toString(){
         String s="S[";
         s= s + protection + ","+ uses;
