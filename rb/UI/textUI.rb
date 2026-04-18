@@ -1,6 +1,6 @@
 
 require 'io/console'
-require_relative 'directions'
+require_relative '../Irrgarten/Directions'
 
 module UI
 
@@ -58,17 +58,17 @@ module UI
 
     def show_game(game_state)
       game = "Game:\n"
-      game += game_state.get_labyrinth + "\n"
-      game += "Current Player:" + game_state.get_current_player+ "\n"
-      game += "Players:\n"
-      game += game_state.get_players + "\n"
-      game += "Monsters:\n"
-      game += game_state.get_monsters + "\n"
-      game += "Log:"
-      game += game_state.get_log + "\n"
+      game += "#{game_state.get_labyrinth}\n"
+      game += "Current Player: #{game_state.get_current_player}\n"
+      game += "Players:\n#{game_state.get_players}\n"
+      game += "Monsters:\n#{game_state.get_monsters}\n"
+      game += "Log:\n#{game_state.get_log}\n"
       
       if game_state.get_winner
-        game += "Game has finished"
+        game += "Game has finished\n"
+      end
+      
+      puts game
     end
 
   end # class   

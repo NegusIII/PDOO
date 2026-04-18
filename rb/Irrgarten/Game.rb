@@ -1,36 +1,40 @@
 #encoding:UTF-8
+require_relative 'Labyrinth'
+require_relative 'Player'
+require_relative 'Dice'
+require_relative 'Monster'
+require_relative 'GameState'
+require_relative 'GameCharacter'
 
 module Irrgarten
     class Game
 
-        MAX_ROUNDS=10
+        @@MAX_ROUNDS=10
 
         def initialize(n_players)
-            dado = Dice.new
-
             @log=""
             @labyrinth = Labyrinth.new(4,4,2,3)
             @players = Array.new
             @monsters = Array.new
 
             n_players.times do |i|
-                actual = Player.new(i, dado.random_intelligence, dado.random_strength)
+                actual = Player.new(i, Dice.random_intelligence, Dice.random_strength)
                 @players << actual
             end
-            @current_player_index=dado.who_starts(n_players)
+            @current_player_index=Dice.who_starts(n_players)
             @current_player=@players[@current_player_index]
 
-            configure_labyrinth
-            #@labyrinth.spread_players(@players)
+            self.configure_labyrinth
+            @labyrinth.spread_players(@players)
         end
 
-        def finished
+        def finished?
             return @labyrinth.have_a_winner
         end
 
         def next_step(preferred_direction)
-            log = ""
-            boolean dead = @current_player.dead
+            @log = ""
+            dead = @current_player.dead
             if (!dead)
                 direction = actual_direction(preferred_direction)
                 if (direction != preferred_direction)
@@ -46,19 +50,19 @@ module Irrgarten
             else
                 manage_resurrection
             end
-            end_game=finished
+            end_game=self.finished?
             if (!end_game)
                 next_player
             end
             end_game
         end
 
-        def get_game_state
+        def game_state
 
-            laberinto = @labyrinth.to_string
+            laberinto = @labyrinth.to_s
             jugadores = @players.map { |p| p.to_s }.join("\n")
             monstruos = @monsters.map { |m| m.to_s }.join("\n")
-            estado = GameState.new(laberinto, jugadores, monstruos, @current_player, finished, @log)
+            estado = GameState.new(laberinto, jugadores, monstruos, @current_player, self.finished?, @log)
 
             return estado
         end
@@ -68,14 +72,17 @@ module Irrgarten
 
 
         def configure_labyrinth
-            dado = Dice.new
-            monstruo1 = Monster.new("Netanyahu", dado.random_intelligence, dado.random_strength)
-            monstruo2 = Monster.new("Bin Laden", dado.random_intelligence, dado.random_strength)
-            monstruo3 = Monster.new("Khamenei", dado.random_intelligence, dado.random_strength)
+            monstruo1 = Monster.new("Netanyahu", Dice.random_intelligence, Dice.random_strength)
+            monstruo2 = Monster.new("Bin Laden", Dice.random_intelligence, Dice.random_strength)
+            monstruo3 = Monster.new("Khamenei", Dice.random_intelligence, Dice.random_strength)
 
             @labyrinth.add_monster(3,3,monstruo1)
             @labyrinth.add_monster(3,1,monstruo2)
             @labyrinth.add_monster(3,0,monstruo3)
+
+            @monsters << monstruo1
+            @monsters << monstruo2
+            @monsters << monstruo3
             
         end
 
@@ -93,8 +100,8 @@ module Irrgarten
             current_row=@current_player.get_row()
             current_col=@current_player.get_col()
 
-            valid_moves = labyrinth.valid_moves(current_row,current_col)
-            output = move(preferredDirection,valid_moves)
+            valid_moves = @labyrinth.valid_moves(current_row,current_col)
+            output = @current_player.move(preferredDirection,valid_moves)
             output
         end
 
@@ -105,7 +112,7 @@ module Irrgarten
             player_attack=@current_player.attack
             lose = monster.defend(player_attack)
 
-            while (!lose && rounds < MAX_ROUNDS) do
+            while (!lose && rounds < @@MAX_ROUNDS) do
                 rounds+=1
                 winner=GameCharacter::MONSTER
                 monster_attack=monster.attack
@@ -117,7 +124,7 @@ module Irrgarten
                     lose = monster.defend(player_attack)
                 end
             end
-            log_rounds
+            log_rounds(rounds, @@MAX_ROUNDS)
             winner
         end
 
@@ -131,8 +138,7 @@ module Irrgarten
         end
 
         def manage_resurrection
-            dado = Dice.new
-            resurrect = dado.resurrect_player
+            resurrect = Dice.resurrect_player
             if (resurrect)
                 @current_player.resurrect
                 log_resurrected
@@ -166,7 +172,7 @@ module Irrgarten
         end
 
         def log_rounds(rounds,max)
-            log+="Se han producido #{rounds} de #{max} rondas de combate\n"
+            @log+="Se han producido #{rounds} de #{max} rondas de combate\n"
         end
 
     end

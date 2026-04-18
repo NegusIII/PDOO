@@ -23,17 +23,18 @@ module Irrgarten
             @labyrinth[@exit_row][@exit_col]='E'
         end
 
-        def spread_players
-            @players.each do |p|
+        def spread_players(players)
+            players.each do |p|
                 pos = random_empty_pos
-                put_player_2d (-1,-1,pos[@@ROW],pos[@@COL],p)
+                put_player_2d(-1,-1,pos[@@ROW],pos[@@COL],p)
+            end
         end
 
         def have_a_winner
             return @players[@exit_row][@exit_col]!=nil
         end
 
-        def to_string
+        def to_s
 
             s=""
 
@@ -59,7 +60,7 @@ module Irrgarten
             old_col=player.get_col
 
             new_pos=dir_2_pos(old_row,old_col,direction)
-            put_player_2d(old_row,old_col,new_pos[ROW],new_pos[COL],player)
+            put_player_2d(old_row,old_col,new_pos[@@ROW],new_pos[@@COL],player)
         end
 
         def add_block(orientation, start_row, start_col, length)
@@ -72,7 +73,7 @@ module Irrgarten
             end
             row=start_row
             col=start_col
-            while (pos_ok(row,col) && empty_pos(row,col) && lenght>0) do
+            while (pos_ok(row,col) && empty_pos(row,col) && length>0) do
                 @labyrinth [row][col]=@@BLOCK_CHAR
                 length=lenght-1
                 row+=inc_row
@@ -107,31 +108,31 @@ module Irrgarten
         end
 
         def empty_pos(row,col)
-            return @labyrinth[row][col]==EMPTY_CHAR;
+            return @labyrinth[row][col]==@@EMPTY_CHAR;
         end
 
         def monster_pos(row,col)
-            return @labyrinth[row][col]==MONSTER_CHAR;
+            return @labyrinth[row][col]==@@MONSTER_CHAR;
         end
 
         def exit_pos(row,col)
-            return @labyrinth[row][col]==EXIT_CHAR;
+            return @labyrinth[row][col]==@@EXIT_CHAR;
         end
 
         def combat_pos(row,col)
-            return @labyrinth[row][col]==COMBAT_CHAR;
+            return @labyrinth[row][col]==@@COMBAT_CHAR;
         end
 
         def can_step_on(row,col)
-            return (pos_ok(row,col)&&(monster_pos(row, col)||exit_pos(row,col)||combat_pos(row,col)))
+            return (pos_ok(row,col) && (empty_pos(row, col) || monster_pos(row, col) || exit_pos(row,col) || combat_pos(row,col)))
         end
 
         def update_old_pos(row,col)
             if (pos_ok(row,col))
                 if(combat_pos(row,col))
-                    @labyrinth[row][col]=MONSTER_CHAR
+                    @labyrinth[row][col]=@@MONSTER_CHAR
                 else
-                    @labyrinth[row][col]=EMPTY_CHAR
+                    @labyrinth[row][col]=@@EMPTY_CHAR
                 end
             end
         end
@@ -152,12 +153,11 @@ module Irrgarten
 
         def random_empty_pos
             empty=false
-            dado =Dice.new
             pos=[0,0]
 
             while (empty==false) do
-                pos[@@ROW]=dado.random_pos(n_rows)
-                pos[@@COL]=dado.random_pos(n_cols)
+                pos[@@ROW]=Dice.random_pos(@n_rows)
+                pos[@@COL]=Dice.random_pos(@n_cols)
                 empty=empty_pos(pos[@@ROW],pos[@@COL])
             end
             return pos
@@ -166,8 +166,8 @@ module Irrgarten
         def put_player_2d(old_row,old_col,row,col,player)
             output=nil
             if (can_step_on(row,col))
-                if (posOK(old_row,old_col))
-                    p=@players[old_row][old_row]
+                if (pos_ok(old_row,old_col))
+                    p=@players[old_row][old_col]
                     if (p==player)
                         update_old_pos(old_row,old_col)
                         @players[old_row][old_col]=nil
@@ -178,9 +178,11 @@ module Irrgarten
                     @labyrinth[row][col]=@@COMBAT_CHAR
                     output = @monsters[row][col]
                 else
-                    number=player.get_number()
+                    number=player.get_number
                     @labyrinth[row][col]=number
                 end
+                @players[row][col] = player
+                player.set_pos(row, col)
             end
             output
         end

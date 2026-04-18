@@ -29,7 +29,7 @@ module Irrgarten
       netanyahu = Monster.new("Netanyahu", 7.0, 4.0)
       netanyahu.set_pos(2, 3)
       
-      puts "Estado inicial: #{netanyahu.to_string}"
+      puts "Estado inicial: #{netanyahu.to_s}"
       puts "Fuerza de ataque generada: #{netanyahu.attack}"
       puts "¿Defiende bien (daño 2.0)?: #{netanyahu.defend}"
       puts "¿Está muerto?: #{netanyahu.dead}\n\n"
@@ -41,7 +41,7 @@ module Irrgarten
       khamenei = Player.new('1', 5.0, 6.0)
       khamenei.set_pos(0, 0)
       
-      puts "Estado inicial: #{khamenei.to_string}"
+      puts "Estado inicial: #{khamenei.to_s}"
       puts "Fila: #{khamenei.get_row}, Columna: #{khamenei.get_col}"
       puts "Identificador (Number): #{khamenei.get_number}"
       puts "Ataque base (sin armas sumadas): #{khamenei.attack}"
@@ -55,7 +55,7 @@ module Irrgarten
       tel_aviv.add_monster(2, 3, netanyahu)
       
       puts "¿Tenemos un ganador?: #{tel_aviv.have_a_winner}"
-      puts "Mapa Visual del Terreno:\n#{tel_aviv.to_string}\n\n"
+      puts "Mapa Visual del Terreno:\n#{tel_aviv.to_s}\n\n"
 
       # Prueba de la clase Game
       puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n\n"

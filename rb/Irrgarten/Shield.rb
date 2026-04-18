@@ -22,6 +22,9 @@ module Irrgarten
             "S[#{@protection},#{@uses}]"
         end
 
+        def discard
+            return Dice.discard_element(@uses)
+        end
         
     end
 end

@@ -25,7 +25,7 @@ module Irrgarten
         end
 
         def get_current_player
-            return @currentPlayer
+            return @current_player
         end
 
         def get_winner

@@ -14,55 +14,55 @@ module Irrgarten
 
         @@generator = Random.new
 
-        def random_pos(max)
+        def self.random_pos(max)
             return @@generator.rand(max)
         end
 
-        def who_starts(nplayers)
+        def self.who_starts(nplayers)
             return @@generator.rand(nplayers)
         end
 
-        def random_intelligence
+        def self.random_intelligence
             return @@generator.rand(@@MAX_INTELLIGENCE)
         end
         
-        def random_strength
+        def self.random_strength
             return @@generator.rand(@@MAX_STRENGHT)
         end
 
-        def resurrect_player
+        def self.resurrect_player
             return (@@generator.rand()<=@@RESURRECT_PROB)
         end
 
-        def weapons_reward
+        def self.weapons_reward
             return @@generator.rand(@@WEAPONS_REWARD)
         end
 
-        def shields_reward
+        def self.shields_reward
             return @@generator.rand(@@SHIELDS_REWARD)
         end
 
-        def health_reward
+        def self.health_reward
             return @@generator.rand(@@HEALTH_REWARD)
         end
 
-        def weapon_power
+        def self.weapon_power
             return @@generator.rand(@@MAX_ATTACK)
         end
 
-        def shield_power
+        def self.shield_power
             return @@generator.rand(@@MAX_SHIELD)
         end
 
-        def uses_left()
+        def self.uses_left()
             return @@generator.rand(@@MAX_USES)
         end
 
-        def intensity(competence)
+        def self.intensity(competence)
             return @@generator.rand(competence)
         end
 
-        def discard_element(uses_left)
+        def self.discard_element(uses_left)
             return (@@generator.rand()>uses_left.to_f/@@MAX_USES)
         end
     end

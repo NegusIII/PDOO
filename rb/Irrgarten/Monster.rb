@@ -18,15 +18,13 @@ module Irrgarten
         end
         
         def attack
-            dado = Dice.new
-            return dado.intensity(@strength)
+            return Dice.intensity(@strength)
         end
 
         def defend(received_attack)
             is_dead = dead
             if (!is_dead)
-                dado=Dice.new
-                defensive_energy = dado.(intelligence)
+                defensive_energy = Dice.intensity(@intelligence)
                 if (defensive_energy < received_attack)
                     got_wounded
                     is_dead = dead

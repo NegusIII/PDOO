@@ -1,4 +1,7 @@
 #encoding:UTF-8
+require_relative'Dice'
+require_relative'Weapon'
+require_relative'Shield'
 
 module Irrgarten
     class Player
@@ -58,6 +61,7 @@ module Irrgarten
                 first_element=valid_moves[0]
                 return first_element
             else return direction
+            end
         end
 
 
@@ -69,9 +73,8 @@ module Irrgarten
         end
 
         def receive_reward
-            dado = Dice.new
-            w_reward = dado.weapons_reward
-            s_reward = dado.shields_reward
+            w_reward = Dice.weapons_reward
+            s_reward = Dice.shields_reward
 
             w_reward.times do 
                 wnew = self.new_weapon
@@ -81,7 +84,7 @@ module Irrgarten
                 snew = self.new_shield
                 self.receive_shield(snew)
             end
-            extra_health = dado.health_reward
+            extra_health = Dice.health_reward
             @health += extra_health
         end
 
@@ -94,7 +97,7 @@ module Irrgarten
 
 
         def receive_weapon(w)
-            @weapons.delete_if(|wi| wi.discard)
+            @weapons.delete_if{|wi| wi.discard}
             if (@weapons.size < @@MAX_WEAPONS)
                 @weapons << w
             end
@@ -102,20 +105,18 @@ module Irrgarten
         end
 
         def receive_shield(s)
-            @shields.delete_if(|si| si.discard)
+            @shields.delete_if{|si| si.discard}
             if (@shields.size < @@MAX_SHIELDS)
                 @shields << s
             end
         end
 
         def new_weapon
-            dado = Dice.new
-            return Weapon.new(dado.weapon_power, dado.uses_left)
+            return Weapon.new(Dice.weapon_power, Dice.uses_left)
         end
 
         def new_shield
-            dado = Dice.new
-            return Shield.new(dado.shield_power, dado.uses_left)
+            return Shield.new(Dice.shield_power, Dice.uses_left)
         end
 
         def sum_weapon
