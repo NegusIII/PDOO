@@ -3,10 +3,10 @@
 module Irrgarten
     class Player
         
-        MAX_WEAPONS=2
-        MAX_SHIELDS=2
-        INITIAL_HEALTH=10
-        HITS2LOSE=3
+        @@MAX_WEAPONS=2
+        @@MAX_SHIELDS=2
+        @@INITIAL_HEALTH=10
+        @@HITS2LOSE=3
 
         def initialize(number, intelligence, strength)
             @weapons = Array.new
@@ -15,7 +15,7 @@ module Irrgarten
             @number=number
             @intelligence=intelligence
             @strength=strength
-            @health=INITIAL_HEALTH
+            @health=@@INITIAL_HEALTH
             @row
             @col
             @consecutive_hits=0
@@ -24,7 +24,7 @@ module Irrgarten
         end
 
         def resurrect
-            @health=INITIAL_HEALTH
+            @health=@@INITIAL_HEALTH
             @weapons = []
             @shields = []
             reset_hits
@@ -51,7 +51,13 @@ module Irrgarten
             return @health==0.0
         end
 
-        def move
+        def move(direction, valid_moves)
+            size = valid_moves.size
+            contained = valid_moves.include?(direction)
+            if (size > 0 && !contained)
+                first_element=valid_moves[0]
+                return first_element
+            else return direction
         end
 
 
@@ -63,21 +69,43 @@ module Irrgarten
         end
 
         def receive_reward
+            dado = Dice.new
+            w_reward = dado.weapons_reward
+            s_reward = dado.shields_reward
 
+            w_reward.times do 
+                wnew = self.new_weapon
+                self.receive_weapon(wnew)
+            end
+            s_reward.times do
+                snew = self.new_shield
+                self.receive_shield(snew)
+            end
+            extra_health = dado.health_reward
+            @health += extra_health
         end
 
-        def to_string
-            "P[#{@name}: I#{@intelligence}, S#{@strength}, H#{@health}, Ch#{@consecutive_hits}, P(#{@row},#{@col})]"
+        def to_s
+            string="P[#{@name}: I#{@intelligence}, S#{@strength}, H#{@health}, Ch#{@consecutive_hits}, P(#{@row},#{@col})]"
         end
 
 
         private
 
 
-        def receive_weapon
+        def receive_weapon(w)
+            @weapons.delete_if(|wi| wi.discard)
+            if (@weapons.size < @@MAX_WEAPONS)
+                @weapons << w
+            end
+            
         end
 
-        def receive_shield
+        def receive_shield(s)
+            @shields.delete_if(|si| si.discard)
+            if (@shields.size < @@MAX_SHIELDS)
+                @shields << s
+            end
         end
 
         def new_weapon
@@ -113,7 +141,18 @@ module Irrgarten
         end
 
         def manage_hit(received_attack)
-
+            defense = self.defensive_energy
+            if (defense < received_attack)
+                got_wounded
+                inc_consecutive_hits
+            else
+                reset_hits
+            end
+            if (consecutive_hits==@@HITS2LOSE || self.dead)
+                lose=true
+            else lose = false
+            end
+            lose
         end
 
         def reset_hits

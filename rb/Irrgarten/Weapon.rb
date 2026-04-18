@@ -2,8 +2,6 @@
 
 module Irrgarten
     class Weapon
-        @power
-        @uses
 
         def initialize(power, uses)
             @power = power
