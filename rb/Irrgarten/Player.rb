@@ -70,6 +70,7 @@ module Irrgarten
         end
 
         def defend(received_attack)
+            return manage_hit(received_attack)
         end
 
         def receive_reward
@@ -154,7 +155,7 @@ module Irrgarten
             else
                 reset_hits
             end
-            if (consecutive_hits==@@HITS2LOSE || self.dead)
+            if (@consecutive_hits==@@HITS2LOSE || self.dead)
                 lose=true
             else lose = false
             end

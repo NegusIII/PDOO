@@ -88,7 +88,7 @@ public class Game {
         for (int i = 0; i < players.size(); i++){
             playersStr+=players.get(i).toString()+"\n";
         }
-        for (int i = 0; i < players.size(); i++){
+        for (int i = 0; i < monsters.size(); i++){
             monstersStr+=monsters.get(i).toString()+"\n";
         }
         

@@ -75,7 +75,7 @@ module Irrgarten
             col=start_col
             while (pos_ok(row,col) && empty_pos(row,col) && length>0) do
                 @labyrinth [row][col]=@@BLOCK_CHAR
-                length=lenght-1
+                length=length-1
                 row+=inc_row
                 col+=inc_col
             end
