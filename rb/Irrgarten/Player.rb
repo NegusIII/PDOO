@@ -19,8 +19,8 @@ module Irrgarten
             @intelligence=intelligence
             @strength=strength
             @health=@@INITIAL_HEALTH
-            @row
-            @col
+            @row=nil
+            @col=nil
             @consecutive_hits=0
 
             @name="Player ##{@number}"
@@ -94,6 +94,10 @@ module Irrgarten
             @weapons.each do |wi|
                 string+="\n"
                 string+=wi.to_s
+            end
+            @shields.each do |si|
+                string+="\n"
+                string+=si.to_s
             end
             string
         end

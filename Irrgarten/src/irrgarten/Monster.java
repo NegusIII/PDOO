@@ -10,8 +10,8 @@ package irrgarten;
  */
 public class Monster {
     
-    private final int INITIAL_HEALTH=5;
-    private final int INVALID_POS=-1;
+    private static final int INITIAL_HEALTH=5;
+    private static final int INVALID_POS=-1;
     
     private String name;
     private float intelligence;
@@ -35,17 +35,15 @@ public class Monster {
     }
     
     public float attack(){
-        Dice dado = new Dice();
-        return dado.intensity(strength);
+        return Dice.intensity(strength);
     }
     
     public boolean defend(float receivedAttack){
         boolean isDead= this.dead();
         
         if (!isDead){
-            Dice dado = new Dice();
             
-            float defensiveEnergy = dado.intensity(intelligence);
+            float defensiveEnergy = Dice.intensity(intelligence);
             
             if(defensiveEnergy < receivedAttack){
                 this.gotWounded();

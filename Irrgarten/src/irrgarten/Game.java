@@ -7,7 +7,7 @@ import java.util.ArrayList;
  */
 public class Game {
     
-    private final int MAX_ROUNDS=10;
+    private static final int MAX_ROUNDS=10;
     private int currentPlayerIndex;
     
     
@@ -20,19 +20,19 @@ public class Game {
     
     // Métodos públicos de la clase Game
     
-    Game(int nplayers){
+    public Game(int nplayers){
         
         // Generar los jugadores
         
         this.players = new ArrayList<>();
-        Dice dado = new Dice();
+        Dice Dice = new Dice();
         for (int i = 0; i < nplayers; i++){
-            Player actual = new Player((char)(i+'0'),dado.randomIntelligence(), dado.randomStrength());
+            Player actual = new Player((char)(i+'0'),Dice.randomIntelligence(), Dice.randomStrength());
             players.add(actual);
         }
         
         // Decidir quién empieza
-        currentPlayerIndex=dado.whoStarts(nplayers);
+        currentPlayerIndex=Dice.whoStarts(nplayers);
         currentPlayer=players.get(currentPlayerIndex);
         
         monsters = new ArrayList();
@@ -99,10 +99,9 @@ public class Game {
     //Métodos privados de la clase Game
     
     private void configureLabyrinth(){
-        Dice dado = new Dice();
-        Monster monstruo1= new Monster("Netanyahu", dado.randomIntelligence(), dado.randomStrength());
-        Monster monstruo2= new Monster("Bin Laden", dado.randomIntelligence(), dado.randomStrength());
-        Monster monstruo3= new Monster("Khamenei", dado.randomIntelligence(), dado.randomStrength());
+        Monster monstruo1= new Monster("Netanyahu", Dice.randomIntelligence(), Dice.randomStrength());
+        Monster monstruo2= new Monster("Bin Laden", Dice.randomIntelligence(), Dice.randomStrength());
+        Monster monstruo3= new Monster("Khamenei", Dice.randomIntelligence(), Dice.randomStrength());
         
         labyrinth.addMonster(3,3,monstruo1);
         labyrinth.addMonster(1,4,monstruo2);
@@ -168,9 +167,9 @@ public class Game {
     }
     
     private void manageResurrection(){
-        Dice dado = new Dice();
+        Dice Dice = new Dice();
         
-        boolean resurrect = dado.resurrectPlayer();
+        boolean resurrect = Dice.resurrectPlayer();
         
         if (resurrect){
             currentPlayer.resurrect();

@@ -7,10 +7,10 @@ import java.util.ArrayList;
  */
 public class Player {
     
-    private final int MAX_WEAPONS=2;
-    private final int MAX_SHIELDS=2;
-    private final int INITIAL_HEALTH=10;
-    private final int HITS2LOSE=3;
+    private static final int MAX_WEAPONS=2;
+    private static final int MAX_SHIELDS=2;
+    private static final int INITIAL_HEALTH=10;
+    private static final int HITS2LOSE=3;
     
     private String name;
     private char number;
@@ -86,10 +86,9 @@ public class Player {
     }
     
     public void receiveReward(){
-        Dice dado = new Dice();
         
-        int wRewards=dado.weaponReward();
-        int sRewards=dado.shieldReward();
+        int wRewards=Dice.weaponReward();
+        int sRewards=Dice.shieldReward();
         
         for (int i = 0; i < wRewards; i++){
             Weapon wnew=this.newWeapon();
@@ -100,7 +99,7 @@ public class Player {
             this.receiveShield(snew);
         }
         
-        int extraHealth = dado.healthReward();
+        int extraHealth = Dice.healthReward();
         health+=extraHealth;
     }
     
@@ -136,17 +135,15 @@ public class Player {
     }
     
     private Weapon newWeapon(){
-        Dice dado = new Dice();
-        float power = dado.weaponPower();
-        int usos=dado.usesLeft();
+        float power = Dice.weaponPower();
+        int usos=Dice.usesLeft();
         Weapon arma = new Weapon(power, usos);
         return arma;
     }
     
     private Shield newShield(){
-        Dice dado = new Dice();
-        float protection = dado.shieldPower();
-        int uses=dado.usesLeft();
+        float protection = Dice.shieldPower();
+        int uses=Dice.usesLeft();
         Shield escudo = new Shield(protection, uses);
         return escudo;
     }

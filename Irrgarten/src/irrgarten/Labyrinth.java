@@ -8,13 +8,13 @@ import java.util.ArrayList;
 public class Labyrinth {
     
         
-    private final char BLOCK_CHAR='X';
-    private final char EMPTY_CHAR='-';
-    private final char MONSTER_CHAR='M';
-    private final char COMBAT_CHAR='C';
-    private final char EXIT_CHAR='E';
-    private final int ROW=0;
-    private final int COL=1;
+    private static final char BLOCK_CHAR='X';
+    private static final char EMPTY_CHAR='-';
+    private static final char MONSTER_CHAR='M';
+    private static final char COMBAT_CHAR='C';
+    private static final char EXIT_CHAR='E';
+    private static final int ROW=0;
+    private static final int COL=1;
     
     private int nRows;
     private int nCols;
@@ -189,12 +189,11 @@ public class Labyrinth {
     
     private int[] randomEmptyPos(){
         boolean empty=false;
-        Dice dado = new Dice();
         int pos[]={0,0};
         
         while (empty==false){
-            pos[ROW]=dado.randomPos(nRows);
-            pos[COL]=dado.randomPos(nCols);
+            pos[ROW]=Dice.randomPos(nRows);
+            pos[COL]=Dice.randomPos(nCols);
             empty=emptyPos(pos[ROW],pos[COL]);
         }
         return pos;

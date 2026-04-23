@@ -35,7 +35,6 @@ public class Shield {
         return s;
     }
     public boolean discard(){
-        Dice dado=new Dice();
-        return dado.discardElement(uses);
+        return Dice.discardElement(uses);
     }
 }
