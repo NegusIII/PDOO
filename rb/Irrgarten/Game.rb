@@ -62,7 +62,7 @@ module Irrgarten
             laberinto = @labyrinth.to_s
             jugadores = @players.map { |p| p.to_s }.join("\n")
             monstruos = @monsters.map { |m| m.to_s }.join("\n")
-            estado = GameState.new(laberinto, jugadores, monstruos, @current_player, self.finished?, @log)
+            estado = GameState.new(laberinto, jugadores, monstruos, @current_player.get_number, self.finished?, @log)
 
             return estado
         end

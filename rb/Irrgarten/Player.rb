@@ -90,6 +90,11 @@ module Irrgarten
 
         def to_s
             string="P[#{@name}: I#{@intelligence}, S#{@strength}, H#{@health}, Ch#{@consecutive_hits}, P(#{@row},#{@col})]"
+            @weapons.each do |wi|
+                string+="\n"
+                string+=wi.to_s
+            end
+            string
         end
 
 

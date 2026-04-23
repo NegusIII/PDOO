@@ -118,13 +118,7 @@ public class Player {
     }
     
     private void receiveWeapon(Weapon w){
-        for (int i = 0; i < weapons.size(); i++){
-            Weapon wi = weapons.get(i);
-            boolean discard = wi.discard();
-            if (discard){
-                weapons.remove(wi);
-            }
-        }
+        weapons.removeIf(wi -> wi.discard());
         int size = weapons.size();
         
         if (size<MAX_WEAPONS){
@@ -133,13 +127,7 @@ public class Player {
     }
     
     private void receiveShield(Shield s){
-        for (int i = 0; i < shields.size(); i++){
-            Shield si = shields.get(i);
-            boolean discard = si.discard();
-            if (discard){
-                shields.remove(si);
-            }
-        }
+        shields.removeIf(si -> si.discard());
         int size = shields.size();
         
         if (size<MAX_SHIELDS){
