@@ -9,8 +9,8 @@ module Irrgarten
         @@WEAPONS_REWARD=2
         @@SHIELDS_REWARD=3
         @@HEALTH_REWARD=5
-        @@MAX_ATTACK=3
-        @@MAX_SHIELD=2
+        @@MAX_ATTACK=3.0
+        @@MAX_SHIELD=2.0
 
         @@generator = Random.new
 

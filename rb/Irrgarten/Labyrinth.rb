@@ -63,7 +63,8 @@ module Irrgarten
             put_player_2d(old_row,old_col,new_pos[@@ROW],new_pos[@@COL],player)
         end
 
-        def add_block(orientation, start_row, start_col, length)
+        def add_block(
+            ation, start_row, start_col, length)
             if (orientation==Orientation::VERTICAL)
                 inc_row=1
                 inc_col=0
@@ -124,7 +125,7 @@ module Irrgarten
         end
 
         def can_step_on(row,col)
-            return (pos_ok(row,col) && (empty_pos(row, col) || monster_pos(row, col) || exit_pos(row,col) || combat_pos(row,col)))
+            return (pos_ok(row,col) && (empty_pos(row, col) || monster_pos(row, col) || exit_pos(row,col)))
         end
 
         def update_old_pos(row,col)

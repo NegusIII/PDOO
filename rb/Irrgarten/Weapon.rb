@@ -10,7 +10,7 @@ module Irrgarten
 
         def attack
             if @uses > 0
-                uses-=1
+                @uses-=1
                 return @power
             
             else
