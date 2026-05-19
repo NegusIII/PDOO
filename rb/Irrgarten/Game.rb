@@ -5,6 +5,7 @@ require_relative 'Dice'
 require_relative 'Monster'
 require_relative 'GameState'
 require_relative 'GameCharacter'
+require_relative 'Orientation'
 
 module Irrgarten
     class Game
@@ -83,6 +84,8 @@ module Irrgarten
             @monsters << monstruo1
             @monsters << monstruo2
             @monsters << monstruo3
+
+            @labyrinth.add_block(Orientation::HORIZONTAL, 1,2,2)
             
         end
 

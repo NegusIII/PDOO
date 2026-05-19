@@ -130,6 +130,15 @@ public class Labyrinth {
         return output;
     }
     
+    
+    //Método para sustituir a un jugador por FuzzyPlayer
+    public void substitute(Player player){
+        int row = player.getRow();
+        int col = player.getCol();
+        players[row][col]=player;
+    }
+    
+    
     // Métodos privados
     
     private boolean posOK(int row, int col){

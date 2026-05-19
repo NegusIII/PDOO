@@ -99,7 +99,7 @@ public class Game {
     //Métodos privados de la clase Game
     
     private void configureLabyrinth(){
-        Monster monstruo1= new Monster("Netanyahu", Dice.randomIntelligence(), Dice.randomStrength());
+        Monster monstruo1= new Monster("Netanyahu", 200, 200);
         Monster monstruo2= new Monster("Bin Laden", Dice.randomIntelligence(), Dice.randomStrength());
         Monster monstruo3= new Monster("Khamenei", Dice.randomIntelligence(), Dice.randomStrength());
         
@@ -174,8 +174,18 @@ public class Game {
         if (resurrect){
             currentPlayer.resurrect();
             this.logResurrected();
+            
+            this.fuzzificate();
         }
         else this.logPlayerSkipTurn();
+    }
+    
+    //Método para sustituir un jugador por un FuzzyPlayer
+    private void fuzzificate(){
+        FuzzyPlayer nuevoFuzzy = new FuzzyPlayer(currentPlayer);
+        currentPlayer=nuevoFuzzy;
+        players.set(currentPlayerIndex, nuevoFuzzy);
+        labyrinth.substitute(nuevoFuzzy);
     }
     
     private void logPlayerWon(){

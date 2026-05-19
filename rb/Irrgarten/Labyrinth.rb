@@ -63,8 +63,7 @@ module Irrgarten
             put_player_2d(old_row,old_col,new_pos[@@ROW],new_pos[@@COL],player)
         end
 
-        def add_block(
-            ation, start_row, start_col, length)
+        def add_block(orientation, start_row, start_col, length)
             if (orientation==Orientation::VERTICAL)
                 inc_row=1
                 inc_col=0
