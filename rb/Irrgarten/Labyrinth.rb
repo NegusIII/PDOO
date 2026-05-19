@@ -99,6 +99,11 @@ module Irrgarten
             output
         end
 
+        def substitute (player)
+            row=player.get_row
+            col=player.get_col
+            @players[row][col]=player
+        end
 
         private
 

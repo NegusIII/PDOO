@@ -65,5 +65,9 @@ module Irrgarten
         def self.discard_element(uses_left)
             return (@@generator.rand()>uses_left.to_f/@@MAX_USES)
         end
+
+        def self.next_step(preference, valid_moves, intelligence)
+            @@generator.rand(@@MAX_INTELLIGENCE)<intelligence ? preference : valid_moves.sample
+        end
     end
 end

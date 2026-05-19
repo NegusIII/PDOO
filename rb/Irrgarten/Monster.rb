@@ -1,20 +1,12 @@
 #encoding:UTF-8
+require_relative'LabyrinthCharacter'
 
 module Irrgarten
-    class Monster
-        INITIAL_HEALTH=5.0
-        INVALID_POS=-1
+    class Monster < LabyrinthCharacter
+        @@INITIAL_HEALTH=5.0
 
         def initialize(name, intelligence, strength)
-            @name=name
-            @intelligence=intelligence
-            @strength=strength
-            @health=INITIAL_HEALTH
-            @row=@col=INVALID_POS
-        end
-
-        def dead
-            return @health==0
+            super(name,intelligence,strength,@@INITIAL_HEALTH)
         end
         
         def attack
@@ -22,24 +14,19 @@ module Irrgarten
         end
 
         def defend(received_attack)
-            is_dead = dead
+            is_dead = dead?
             if (!is_dead)
                 defensive_energy = Dice.intensity(@intelligence)
                 if (defensive_energy < received_attack)
                     got_wounded
-                    is_dead = dead
+                    is_dead = dead?
                 end
             end
             is_dead
         end
 
-        def set_pos(row, col)
-            @row=row
-            @col=col
-        end
-
         def to_s
-            "M[#{@name}: I#{@intelligence}, S#{@strength}, H#{@health}, P(#{@row},#{@col})]"
+            super
         end
 
         private

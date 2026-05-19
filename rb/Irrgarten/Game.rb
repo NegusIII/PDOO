@@ -6,6 +6,7 @@ require_relative 'Monster'
 require_relative 'GameState'
 require_relative 'GameCharacter'
 require_relative 'Orientation'
+require_relative 'FuzzyPlayer'
 
 module Irrgarten
     class Game
@@ -35,7 +36,7 @@ module Irrgarten
 
         def next_step(preferred_direction)
             @log = ""
-            dead = @current_player.dead
+            dead = @current_player.dead?
             if (!dead)
                 direction = actual_direction(preferred_direction)
                 if (direction != preferred_direction)
@@ -73,11 +74,11 @@ module Irrgarten
 
 
         def configure_labyrinth
-            monstruo1 = Monster.new("Netanyahu", Dice.random_intelligence, Dice.random_strength)
+            monstruo1 = Monster.new("Netanyahu", 200, 200)
             monstruo2 = Monster.new("Bin Laden", Dice.random_intelligence, Dice.random_strength)
             monstruo3 = Monster.new("Khamenei", Dice.random_intelligence, Dice.random_strength)
 
-            @labyrinth.add_monster(3,3,monstruo1)
+            @labyrinth.add_monster(2,1,monstruo1)
             @labyrinth.add_monster(3,1,monstruo2)
             @labyrinth.add_monster(3,0,monstruo3)
 
@@ -145,9 +146,17 @@ module Irrgarten
             if (resurrect)
                 @current_player.resurrect
                 log_resurrected
+                fuzzificate
             else
                 log_player_skip_turn
             end
+        end
+
+        def fuzzificate
+            nuevo_fuzzy=FuzzyPlayer.new(@current_player)
+            @current_player=nuevo_fuzzy
+            @players[@current_player_index]=nuevo_fuzzy
+            @labyrinth.substitute(nuevo_fuzzy)
         end
 
         def log_player_won

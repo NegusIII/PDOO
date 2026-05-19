@@ -2,28 +2,34 @@
 require_relative'Dice'
 require_relative'Weapon'
 require_relative'Shield'
+require_relative'LabyrinthCharacter'
 
 module Irrgarten
-    class Player
+    class Player < LabyrinthCharacter
+
+        attr_reader :number, :consecutive_hits
         
         @@MAX_WEAPONS=2
         @@MAX_SHIELDS=2
-        @@INITIAL_HEALTH=10
+        @@INITIAL_HEALTH=10.0
         @@HITS2LOSE=3
 
         def initialize(number, intelligence, strength)
-            @weapons = Array.new
-            @shields = Array.new
-
+            super("Player #{number}", intelligence, strength, @@INITIAL_HEALTH)
             @number=number
-            @intelligence=intelligence
-            @strength=strength
-            @health=@@INITIAL_HEALTH
-            @row=nil
-            @col=nil
             @consecutive_hits=0
 
-            @name="Player ##{@number}"
+            @weapons = Array.new
+            @shields = Array.new
+        end
+
+        def copy(other)
+            super
+            @number=other.number
+            @consecutive_hits=other.consecutive_hits
+
+            @weapons= Array.new
+            @shields= Array.new
         end
 
         def resurrect
@@ -33,25 +39,8 @@ module Irrgarten
             reset_hits
         end
 
-        def get_row
-            return @row
-        end
-        
-        def get_col
-            return @col
-        end
-
         def get_number
             return @number
-        end
-
-        def set_pos(row,col)
-            @row=row
-            @col=col
-        end
-
-        def dead
-            return @health==0.0
         end
 
         def move(direction, valid_moves)
@@ -63,7 +52,6 @@ module Irrgarten
             else return direction
             end
         end
-
 
         def attack
             return @strength + sum_weapon
@@ -90,26 +78,41 @@ module Irrgarten
         end
 
         def to_s
-            string="P[#{@name}: I#{@intelligence}, S#{@strength}, H#{@health}, Ch#{@consecutive_hits}, P(#{@row},#{@col})]"
-            string+="\n"
-            string+="weapons:"
+            string=super + "\nConsecutive Hits: #{@consecutive_hits}"
+            string+="\nweapons:"
             @weapons.each do |wi|
-                string+="\n"
-                if(wi == nil)
-                    string += "nil"
-                else
-                    string+=wi.to_s
-                end
+                string+=wi.to_s + "     "
             end
-            string+="\n"
-            string+="shields:"
+            string+="\nshields:"
             @shields.each do |si|
-                string+="\n"
-                string+=si.to_s
+                string+=si.to_s + "     "
             end
             string
         end
 
+        protected
+
+        def sum_weapon
+            suma=0.0
+
+            @weapons.each do |w|
+                suma += w.attack
+            end
+            return suma
+        end
+
+        def sum_shield
+            suma=0.0
+
+            @shields.each do |s|
+                suma += s.protect
+            end
+            return suma
+        end
+
+        def defensive_energy
+            return @intelligence+sum_shield
+        end
 
         private
 
@@ -135,29 +138,7 @@ module Irrgarten
 
         def new_shield
             return Shield.new(Dice.shield_power, Dice.uses_left)
-        end
-
-        def sum_weapon
-            suma=0.0
-
-            @weapons.each do |w|
-                suma += w.attack
-            end
-            return suma
-        end
-
-        def sum_shield
-            suma=0.0
-
-            @shields.each do |s|
-                suma += s.protect
-            end
-            return suma
-        end
-
-        def defensive_energy
-            return @intelligence+sum_shield
-        end
+        end        
 
         def manage_hit(received_attack)
             defense = self.defensive_energy
@@ -167,7 +148,7 @@ module Irrgarten
             else
                 reset_hits
             end
-            if (@consecutive_hits==@@HITS2LOSE || self.dead)
+            if (@consecutive_hits==@@HITS2LOSE || self.dead?)
                 lose=true
             else lose = false
             end
@@ -178,12 +159,9 @@ module Irrgarten
             @consecutive_hits=0
         end
 
-        def got_wounded
-            @health-=1
-        end
-
         def inc_consecutive_hits
             @consecutive_hits+=1
         end
+
     end
 end

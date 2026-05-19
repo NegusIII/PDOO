@@ -1,29 +1,15 @@
 #encoding:utf-8
+require_relative 'CombatElement'
 
 module Irrgarten
-    class Weapon
-
-        def initialize(power, uses)
-            @power = power
-            @uses = uses
-        end
-
+    class Weapon < CombatElement
+        
         def attack
-            if @uses > 0
-                @uses-=1
-                return @power
-            
-            else
-                return 0
-            end
+            produce_effect
         end
 
         def to_s
-            "W[#{@power},#{@uses}]"
-        end
-
-        def discard
-            return Dice.discard_element(@uses)
+            "W" + super
         end
     end
 end
