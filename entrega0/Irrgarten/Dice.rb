@@ -1,0 +1,76 @@
+#encoding:utf-8
+
+module Irrgarten
+    class Dice
+        @@MAX_USES=5
+        @@MAX_INTELLIGENCE=10.0
+        @@MAX_STRENGHT=10.0
+        @@RESURRECT_PROB=0.3
+        @@WEAPONS_REWARD=2
+        @@SHIELDS_REWARD=3
+        @@HEALTH_REWARD=5
+        @@MAX_ATTACK=3
+        @@MAX_SHIELD=2
+        @@PROB_EVADE=0.1
+
+        @@generator = Random.new
+
+        def self.random_pos(max)
+            return @@generator.rand(max)
+        end
+
+        def self.who_starts(nplayers)
+            return @@generator.rand(nplayers)
+        end
+
+        def self.random_intelligence
+            return @@generator.rand(@@MAX_INTELLIGENCE)
+        end
+        
+        def self.random_strength
+            return @@generator.rand(@@MAX_STRENGHT)
+        end
+
+        def self.resurrect_player
+            return (@@generator.rand()<=@@RESURRECT_PROB)
+        end
+
+        def self.weapons_reward
+            return @@generator.rand(@@WEAPONS_REWARD)
+        end
+
+        def self.shields_reward
+            return @@generator.rand(@@SHIELDS_REWARD)
+        end
+
+        def self.health_reward
+            return @@generator.rand(@@HEALTH_REWARD)
+        end
+
+        def self.weapon_power
+            return @@generator.rand(@@MAX_ATTACK)
+        end
+
+        def self.shield_power
+            return @@generator.rand(@@MAX_SHIELD)
+        end
+
+        def self.uses_left()
+            return @@generator.rand(@@MAX_USES)
+        end
+
+        def self.intensity(competence)
+            return @@generator.rand(competence)
+        end
+
+        def self.discard_element(uses_left)
+            return (@@generator.rand>uses_left.to_f/@@MAX_USES)
+        end
+        
+        
+        
+        def self.evade_combat?
+            return (@@generator.rand<=@@PROB_EVADE)
+        end
+    end
+end
