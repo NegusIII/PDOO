@@ -5,6 +5,7 @@
 package irrgarten.main;
 import irrgarten.Game;
 import irrgarten.UI.TextUI;
+import irrgarten.UI.GraphicUI;
 import irrgarten.controller.Controller;
 
 /**
@@ -15,16 +16,10 @@ public class Main {
 
     public static void main(String[] args) {
         
-        //TestP1 test = new TestP1();
-        //test.main();
-        
-        //TestP2 test = new TestP2();
-        //test.main();
-        
         int nPlayers=3;
         
         Game game = new Game(nPlayers);
-        TextUI view = new TextUI();
+        GraphicUI view = new GraphicUI();
         Controller controller = new Controller(game,view);
         
         controller.play();

@@ -5,7 +5,7 @@ import irrgarten.GameState;
 import java.util.Scanner;
 
 
-public class TextUI {
+public class TextUI implements UI{
     
     private static Scanner in = new Scanner(System.in);
     
@@ -15,6 +15,7 @@ public class TextUI {
     }
     
 
+    @Override
     public Directions nextMove() {
         System.out.print("Where? ");
         
@@ -49,6 +50,7 @@ public class TextUI {
         return direction;
     }
     
+    @Override
     public void showGame(GameState gameState) {  
         String game="Game:\n";
         game+=gameState.getLabyrinth()+"\n";
