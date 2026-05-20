@@ -41,6 +41,6 @@ public class Monster extends LabyrinthCharacter{
     
     @Override
     public String toString(){
-        return "M"+super.toString();
+        return super.toString();
     }
 }

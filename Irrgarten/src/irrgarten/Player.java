@@ -15,6 +15,9 @@ public class Player extends LabyrinthCharacter{
     private char number;
     private int consecutiveHits=0;
     
+    private WeaponCardDeck weaponCardDeck;
+    private ShieldCardDeck shieldCardDeck;
+    
     private ArrayList<Weapon> weapons;
     private ArrayList<Shield> shields;
     
@@ -22,6 +25,9 @@ public class Player extends LabyrinthCharacter{
     public Player(char number, float intelligence, float strength){
         super("Player#"+number,intelligence,strength,INITIAL_HEALTH);
         this.number=number;
+        
+        this.weaponCardDeck = new WeaponCardDeck();
+        this.shieldCardDeck = new ShieldCardDeck();
         
         this.weapons = new ArrayList<>();
         this.shields = new ArrayList<>();
@@ -31,6 +37,9 @@ public class Player extends LabyrinthCharacter{
         
         this.number=other.number;
         this.consecutiveHits = other.consecutiveHits;
+        
+        this.weaponCardDeck = other.weaponCardDeck;
+        this.shieldCardDeck = other.shieldCardDeck;
         
         this.weapons = new ArrayList<>(other.weapons);
         this.shields = new ArrayList<>(other.shields);
@@ -88,7 +97,7 @@ public class Player extends LabyrinthCharacter{
     
     @Override
     public String toString(){
-        String s="P"+super.toString()+"\nConsecutive hits:" + consecutiveHits+"\nweapons:";
+        String s=super.toString()+"\nConsecutive hits:" + consecutiveHits+"\nweapons:";
         for(int i = 0; i<weapons.size();i++){
             s+=weapons.get(i).toString()+"      ";
         }
@@ -118,17 +127,11 @@ public class Player extends LabyrinthCharacter{
     }
     
     private Weapon newWeapon(){
-        float power = Dice.weaponPower();
-        int usos=Dice.usesLeft();
-        Weapon arma = new Weapon(power, usos);
-        return arma;
+        return weaponCardDeck.nextCard();
     }
     
     private Shield newShield(){
-        float protection = Dice.shieldPower();
-        int uses=Dice.usesLeft();
-        Shield escudo = new Shield(protection, uses);
-        return escudo;
+        return shieldCardDeck.nextCard();
     }
     
     protected float sumWeapon(){
