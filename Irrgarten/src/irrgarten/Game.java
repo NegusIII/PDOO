@@ -36,7 +36,7 @@ public class Game {
         currentPlayer=players.get(currentPlayerIndex);
         
         monsters = new ArrayList();
-        labyrinth = new Labyrinth(7,5,2,3);
+        labyrinth = new Labyrinth(10,10,2,3);
         
         log="";
         

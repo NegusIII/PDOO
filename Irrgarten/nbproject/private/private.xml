@@ -5,17 +5,12 @@
         <group>
             <file>file:/home/ed/Escritorio/PDOO/PDOO/Irrgarten/src/irrgarten/GameState.java</file>
             <file>file:/home/ed/Escritorio/PDOO/PDOO/Irrgarten/src/irrgarten/controller/Controller.java</file>
-            <file>file:/home/ed/Escritorio/PDOO/PDOO/Irrgarten/src/irrgarten/Monster.java</file>
-            <file>file:/home/ed/Escritorio/PDOO/PDOO/Irrgarten/src/irrgarten/Dice.java</file>
             <file>file:/home/ed/Escritorio/PDOO/PDOO/Irrgarten/src/irrgarten/UI/TextUI.java</file>
-            <file>file:/home/ed/Escritorio/PDOO/PDOO/Irrgarten/src/irrgarten/Directions.java</file>
-            <file>file:/home/ed/Escritorio/PDOO/PDOO/Irrgarten/src/irrgarten/TestP1.java</file>
             <file>file:/home/ed/Escritorio/PDOO/PDOO/Irrgarten/src/irrgarten/Game.java</file>
-            <file>file:/home/ed/Escritorio/PDOO/PDOO/Irrgarten/src/irrgarten/Player.java</file>
-            <file>file:/home/ed/Escritorio/PDOO/PDOO/Irrgarten/src/irrgarten/Weapon.java</file>
-            <file>file:/home/ed/Escritorio/PDOO/PDOO/Irrgarten/src/irrgarten/Labyrinth.java</file>
-            <file>file:/home/ed/Escritorio/PDOO/PDOO/Irrgarten/src/irrgarten/Shield.java</file>
+            <file>file:/home/ed/Escritorio/PDOO/PDOO/Irrgarten/src/irrgarten/UI/Cursors.java</file>
             <file>file:/home/ed/Escritorio/PDOO/PDOO/Irrgarten/src/irrgarten/main/Main.java</file>
+            <file>file:/home/ed/Escritorio/PDOO/PDOO/Irrgarten/src/irrgarten/UI/UI.java</file>
+            <file>file:/home/ed/Escritorio/PDOO/PDOO/Irrgarten/src/irrgarten/UI/GraphicUI.java</file>
         </group>
     </open-files>
 </project-private>
