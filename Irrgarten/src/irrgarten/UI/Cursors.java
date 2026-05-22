@@ -7,7 +7,8 @@ import irrgarten.Directions;
 
 /**
  *
- * @author ed
+ * @author Sergio Salvador Gil
+ * 
  */
 public class Cursors extends javax.swing.JDialog {
     

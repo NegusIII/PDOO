@@ -16,7 +16,7 @@ public class Main {
 
     public static void main(String[] args) {
         
-        int nPlayers=3;
+        int nPlayers=8;
         
         Game game = new Game(nPlayers);
         GraphicUI view = new GraphicUI();
