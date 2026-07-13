@@ -18,11 +18,11 @@ public class Controller {
     public void play() {
         boolean endOfGame = false;
         while (!endOfGame) {
-            view.showGame(game.getGameState()); 
+            view.showGame(game.GameState()); 
             Directions direction = view.nextMove(); 
             endOfGame = game.nextStep(direction);
         }
-      view.showGame(game.getGameState());        
+      view.showGame(game.GameState());        
     }
     
 }

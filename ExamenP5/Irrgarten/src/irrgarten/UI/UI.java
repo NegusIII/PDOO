@@ -1,0 +1,15 @@
+package irrgarten.UI;
+import irrgarten.Directions;
+import irrgarten.GameState;
+
+/**
+ *
+ * @author Sergio Salvador Gil
+ */
+public interface UI {
+    public Directions nextMove();
+    public void showGame(GameState gameState);
+    default boolean catastrophe(){
+        return false;
+    }
+}

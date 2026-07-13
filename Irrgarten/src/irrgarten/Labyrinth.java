@@ -25,7 +25,7 @@ public class Labyrinth {
     private Player[][] players;
     private char[][]labyrinth;
     
-    Labyrinth(int nRows, int nCols, int exitRow, int exitCol){
+    public Labyrinth(int nRows, int nCols, int exitRow, int exitCol){
         this.nRows=nRows;
         this.nCols=nCols;
         this.exitRow=exitRow;

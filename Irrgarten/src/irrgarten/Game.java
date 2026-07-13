@@ -25,7 +25,6 @@ public class Game {
         // Generar los jugadores
         
         this.players = new ArrayList<>();
-        Dice Dice = new Dice();
         for (int i = 0; i < nplayers; i++){
             Player actual = new Player((char)(i+'0'),Dice.randomIntelligence(), Dice.randomStrength());
             players.add(actual);
@@ -35,7 +34,7 @@ public class Game {
         currentPlayerIndex=Dice.whoStarts(nplayers);
         currentPlayer=players.get(currentPlayerIndex);
         
-        monsters = new ArrayList();
+        monsters = new ArrayList<>();
         labyrinth = new Labyrinth(10,10,2,3);
         
         log="";
@@ -81,7 +80,7 @@ public class Game {
         return endGame;
     }
     
-    public GameState getGameState(){
+    public GameState GameState(){
         String playersStr="";
         String monstersStr="";
         
@@ -167,7 +166,6 @@ public class Game {
     }
     
     private void manageResurrection(){
-        Dice Dice = new Dice();
         
         boolean resurrect = Dice.resurrectPlayer();
         
